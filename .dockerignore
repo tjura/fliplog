@@ -1,0 +1,11 @@
+.git
+.next
+node_modules
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+.DS_Store
+coverage
+backups
+AGENTS.md
