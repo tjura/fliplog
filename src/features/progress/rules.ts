@@ -24,7 +24,7 @@ export function isRating(value: unknown): value is Rating {
 export function ratingText(rating: Rating | null): string {
   return rating === null
     ? "Not started"
-    : `${rating} ${rating === 1 ? "star" : "stars"} — ${ratingLabels[rating]}`;
+    : `Level ${rating} of 5 — ${ratingLabels[rating]}`;
 }
 
 export function parseRatingChange(

@@ -8,7 +8,7 @@ import {
 
 test("null is outside the five ratings and 1 means learning, never an implicit default", () => {
   assert.equal(ratingText(null), "Not started");
-  assert.equal(ratingText(1), "1 star — Started learning");
+  assert.equal(ratingText(1), "Level 1 of 5 — Started learning");
   for (const rating of ratingOptions)
     assert.deepEqual(parseRatingChange({ skillId: "F11", rating }), {
       skillId: "F11",

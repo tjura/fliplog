@@ -13,6 +13,7 @@ import { BackToSkills } from "../../../features/catalogue/navigation";
 import { getSession } from "../../../server/auth";
 import { readProgress } from "../../../server/progress";
 import { RatingForm } from "../../../features/progress/rating-form";
+import { LevelRing } from "../../../features/progress/level-ring";
 import { FoundationsSection } from "../../../features/progress/foundations-section";
 
 export default async function SkillPage({
@@ -64,14 +65,18 @@ export default async function SkillPage({
             />
           ) : (
             <>
-              <p>
-                <Link
-                  href={`/sign-in?returnTo=${encodeURIComponent(`/skills/${skill.slug}?from=${encodeURIComponent(returnPath(query.from))}`)}`}
-                >
-                  Sign in to record progress
-                </Link>
-              </p>
-              <p className="note">Ratings belong to this surface only.</p>
+              <div className="level-card">
+                <LevelRing rating={null} />
+                <p className="note">
+                  Track your level for this skill on this surface.
+                </p>
+              </div>
+              <Link
+                className="button full-width"
+                href={`/sign-in?returnTo=${encodeURIComponent(`/skills/${skill.slug}?from=${encodeURIComponent(returnPath(query.from))}`)}`}
+              >
+                Sign in to track
+              </Link>
             </>
           )}
         </section>

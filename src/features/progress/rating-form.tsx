@@ -4,6 +4,7 @@ import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useClientReady } from "../../components/use-client-ready";
+import { LevelRing } from "./level-ring";
 import {
   isSavedRating,
   ratingLabels,
@@ -80,20 +81,34 @@ export function RatingForm({
 
   return (
     <div className="rating-form">
-      <p className="saved-rating">Saved: {ratingText(saved.rating)}</p>
-      {saved.updatedAt ? (
-        <p className="note">
-          Updated{" "}
-          <time dateTime={saved.updatedAt}>{saved.updatedAt.slice(0, 10)}</time>{" "}
-          (UTC)
-        </p>
-      ) : null}
+      <div className="level-card">
+        <LevelRing rating={saved.rating} />
+        <div>
+          <p className="saved-rating">
+            <span className="visually-hidden">Saved: </span>
+            {saved.rating === null ? "Not started" : ratingLabels[saved.rating]}
+          </p>
+          <p className="note">
+            {saved.updatedAt ? (
+              <>
+                Saved{" "}
+                <time dateTime={saved.updatedAt}>
+                  {saved.updatedAt.slice(0, 10)}
+                </time>{" "}
+                (UTC)
+              </>
+            ) : (
+              "No level saved yet"
+            )}
+          </p>
+        </div>
+      </div>
       <form method="post" onSubmit={submit} aria-busy={pending || !ready}>
         <fieldset
           disabled={pending || !ready}
           aria-describedby="rating-choice rating-error"
         >
-          <legend>Choose your self-rating</legend>
+          <legend>Update your level</legend>
           <div className="rating-choices">
             {ratingOptions.map((rating) => (
               <label className="rating-option" key={rating}>
@@ -102,7 +117,7 @@ export function RatingForm({
                   name="rating"
                   value={rating}
                   checked={draft === rating}
-                  aria-label={`${rating} ${rating === 1 ? "star" : "stars"} — ${ratingLabels[rating]}`}
+                  aria-label={ratingText(rating)}
                   onChange={() => {
                     setDraft(rating);
                     setError("");
@@ -110,20 +125,28 @@ export function RatingForm({
                     setRetryValue(undefined);
                   }}
                 />
-                <span aria-hidden="true">
+                <span
+                  aria-hidden="true"
+                  className={
+                    draft !== null && rating <= draft ? "filled" : undefined
+                  }
+                >
+                  <span
+                    className="level-bar"
+                    style={{ height: `${rating * 12}px` }}
+                  />
                   {rating}
-                  <svg viewBox="0 0 24 24">
-                    <path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9Z" />
-                  </svg>
                 </span>
               </label>
             ))}
           </div>
         </fieldset>
-        <p id="rating-choice">
+        <p id="rating-choice" className="rating-choice">
           {draft === null
-            ? "No rating selected."
-            : `${draft !== saved.rating ? "Unsaved choice: " : "Selected: "}${ratingText(draft)}`}
+            ? "Tap a bar to pick your level"
+            : draft !== saved.rating
+              ? `${saved.rating ?? "–"} → ${draft}: ${ratingLabels[draft]} (not saved)`
+              : null}
         </p>
         <button
           type="submit"
@@ -131,10 +154,14 @@ export function RatingForm({
             !ready || pending || draft === null || draft === saved.rating
           }
         >
-          {pending ? "Saving…" : "Save rating"}
+          {pending
+            ? "Saving…"
+            : draft !== null && draft === saved.rating
+              ? "Saved"
+              : `Save level${draft === null ? "" : ` ${draft}`}`}
         </button>
       </form>
-      <p className="save-status" role="status">
+      <p className="visually-hidden" role="status">
         {message}
       </p>
       <div
