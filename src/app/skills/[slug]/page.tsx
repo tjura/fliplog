@@ -15,6 +15,7 @@ import { readProgress } from "../../../server/progress";
 import { RatingForm } from "../../../features/progress/rating-form";
 import { LevelRing } from "../../../features/progress/level-ring";
 import { FoundationsSection } from "../../../features/progress/foundations-section";
+import { foundationThreshold } from "../../../features/progress/foundations.ts";
 
 export default async function SkillPage({
   params,
@@ -37,21 +38,14 @@ export default async function SkillPage({
           <ul className="chip-row" aria-label="Skill context">
             <li className="chip">{surfaceNames[skill.surface]}</li>
             <li className="chip">{groups[skill.group]}</li>
+            {skill.group >= 2 ? (
+              <li className="chip chip-coach">Coach-led</li>
+            ) : null}
           </ul>
           <SkillArt skill={skill} />
           <h1>{skill.name}</h1>
         </header>
         <p className="skill-summary">{skill.description}</p>
-        <section className="detail-section">
-          <h2>Orientation for coached practice</h2>
-          <p>{skill.orientation}</p>
-          {skill.group >= 2 ? (
-            <p className="note">
-              Discuss advanced skills with a qualified coach for this surface.
-              Equipment and landing arrangements need individual assessment.
-            </p>
-          ) : null}
-        </section>
         <section className="detail-section">
           <h2>Your progress</h2>
           {session ? (
@@ -85,8 +79,22 @@ export default async function SkillPage({
           progress={session ? progress : null}
           from={returnPath(query.from)}
         />
-        <section className="detail-section">
-          <h2>Sources & context</h2>
+        <details className="coach-notes">
+          <summary>Coach notes and sources</summary>
+          <p>{skill.orientation}</p>
+          {skill.group >= 2 ? (
+            <p>
+              Discuss advanced skills with a qualified coach for this surface.
+              Equipment and landing arrangements need individual assessment.
+            </p>
+          ) : null}
+          <p className="note">
+            Levels are personal notes for this surface, not a safety clearance.
+            Level {foundationThreshold}+ on a foundation is our reminder
+            threshold, not a coaching standard or permission to attempt a
+            skill. Illustrations identify a movement; they do not show how to
+            perform it.
+          </p>
           <ul className="source-list">
             {skill.sources.map((ref) => (
               <li key={ref}>
@@ -101,11 +109,7 @@ export default async function SkillPage({
             foundation reminders are editorial suggestions, not a validated
             coaching curriculum.
           </p>
-        </section>
-        <p className="note">
-          Your ratings are personal notes and not a safety clearance.
-          Illustrations identify a movement; they do not show how to perform it.
-        </p>
+        </details>
       </main>
     </>
   );

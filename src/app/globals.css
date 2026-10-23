@@ -353,6 +353,59 @@ p {
   font-size: 14px;
   font-weight: 600;
 }
+.chip-coach {
+  background: #f2ab7b;
+  color: var(--ink);
+}
+.coach-notes {
+  margin-top: 8px;
+  border-radius: 12px;
+  background: var(--surface);
+}
+.coach-notes summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0 16px;
+  font-weight: 650;
+  cursor: pointer;
+}
+.coach-notes summary::before {
+  content: "i" / "";
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--teal);
+  color: #fff;
+  font:
+    700 14px/1 Georgia,
+    serif;
+}
+.coach-notes summary::-webkit-details-marker {
+  display: none;
+}
+.coach-notes summary::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  margin-left: auto;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform 150ms ease;
+}
+.coach-notes[open] summary::after {
+  transform: rotate(225deg);
+}
+.coach-notes[open] summary {
+  border-bottom: 1px solid #e4e9e7;
+}
+.coach-notes > :not(summary) {
+  margin: 14px 16px;
+}
 .skill-summary {
   font-size: 18px;
   line-height: 1.4;

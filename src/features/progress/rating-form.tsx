@@ -233,10 +233,6 @@ export function RatingForm({
           </button>
         )
       ) : null}
-      <p className="note">
-        A personal rating for this surface, not a safety clearance. Record your
-        actual coached practice.
-      </p>
       <noscript>
         <p className="note">Enable JavaScript to edit progress or sign out.</p>
       </noscript>
