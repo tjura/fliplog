@@ -32,17 +32,15 @@ export default async function SkillPage({
       <Header />
       <main id="main" tabIndex={-1}>
         <BackToSkills href={returnPath(query.from)} />
-        <h1>{skill.name}</h1>
-        <p className="skill-context">
-          {surfaceNames[skill.surface]} · {groups[skill.group]}
-        </p>
-        <div className="detail-art">
+        <header className="skill-hero">
+          <ul className="chip-row" aria-label="Skill context">
+            <li className="chip">{surfaceNames[skill.surface]}</li>
+            <li className="chip">{groups[skill.group]}</li>
+          </ul>
           <SkillArt skill={skill} />
-        </div>
-        <section className="detail-section">
-          <h2>Description</h2>
-          <p>{skill.description}</p>
-        </section>
+          <h1>{skill.name}</h1>
+        </header>
+        <p className="skill-summary">{skill.description}</p>
         <section className="detail-section">
           <h2>Orientation for coached practice</h2>
           <p>{skill.orientation}</p>

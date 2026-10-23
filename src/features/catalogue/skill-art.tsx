@@ -121,56 +121,69 @@ export function SkillArt({
       aria-hidden={decorative || undefined}
       className="skill-art"
     >
-      <ellipse cx="120" cy="124" rx="92" ry="8" fill="#152927" opacity=".07" />
+      <ellipse className="art-shadow" cx="120" cy="124" rx="92" ry="8" />
       {skill.surface === "trampoline" ? (
-        <g stroke="#152927" strokeWidth="3" strokeLinejoin="round">
+        <g className="art-ink" strokeWidth="3" strokeLinejoin="round">
           <path
+            className="art-bed"
             d="M35 112 L52 104 H188 L205 112 L199 117 H41 Z"
-            fill="#b7d8d1"
           />
           <path
+            className="art-bed-line"
             d="M50 110 H189 M57 107 H183"
-            stroke="#136F63"
             strokeWidth="1"
           />
           <path d="M49 117 L45 133 M190 117 L195 133 M68 117 L77 129 M171 117 L163 129" />
         </g>
       ) : (
-        <g stroke="#152927" strokeWidth="3">
-          <rect x="31" y="106" width="178" height="19" rx="8" fill="#136F63" />
+        <g className="art-ink" strokeWidth="3">
+          <rect
+            className="art-track"
+            x="31"
+            y="106"
+            width="178"
+            height="19"
+            rx="8"
+          />
           <path
+            className="art-track-top"
             d="M32 113 Q32 106 40 106 H200 Q208 106 208 113 H32 Z"
-            fill="#dcece7"
           />
         </g>
       )}
       <g
         transform={drawing.transform}
-        stroke="#152927"
+        className="art-ink"
         strokeWidth="6"
         strokeLinecap="round"
         strokeLinejoin="round"
       >
         <path d={drawing.limbs} fill="none" />
-        <path d={drawing.body} fill="#136F63" strokeWidth="3" />
+        <path className="art-body" d={drawing.body} strokeWidth="3" />
         <circle
           cx={drawing.head[0]}
           cy={drawing.head[1]}
           r="9"
-          fill="#F2AB7B"
+          className="art-skin"
           strokeWidth="3"
         />
       </g>
       {skill.pose === "seat" || skill.pose === "round-off" ? (
         <g
           transform="translate(92 28) scale(.7)"
-          stroke="#152927"
+          className="art-ink"
           strokeWidth="5"
           strokeLinecap="round"
         >
           <path d={upright.limbs} fill="none" />
-          <path d={upright.body} fill="#136F63" strokeWidth="3" />
-          <circle cx="120" cy="27" r="9" fill="#F2AB7B" strokeWidth="3" />
+          <path className="art-body" d={upright.body} strokeWidth="3" />
+          <circle
+            className="art-skin"
+            cx="120"
+            cy="27"
+            r="9"
+            strokeWidth="3"
+          />
         </g>
       ) : null}
       {drawing.label && !decorative ? (
@@ -178,7 +191,7 @@ export function SkillArt({
           x="120"
           y="147"
           textAnchor="middle"
-          fill="#152927"
+          className="art-label"
           fontSize="10"
           fontFamily="system-ui, sans-serif"
         >
