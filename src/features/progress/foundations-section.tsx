@@ -34,6 +34,10 @@ export function FoundationsSection({
                   ) : reminder.recorded ? (
                     <span className="recorded-foundation">
                       {ratingText(reminder.rating)}
+                      <span className="visually-hidden">
+                        {" "}
+                        · recorded foundation
+                      </span>
                     </span>
                   ) : (
                     <span>
