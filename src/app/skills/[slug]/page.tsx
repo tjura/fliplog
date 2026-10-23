@@ -91,9 +91,9 @@ export default async function SkillPage({
           <p className="note">
             Levels are personal notes for this surface, not a safety clearance.
             Level {foundationThreshold}+ on a foundation is our reminder
-            threshold, not a coaching standard or permission to attempt a
-            skill. Illustrations identify a movement; they do not show how to
-            perform it.
+            threshold, not a coaching standard or permission to attempt a skill.
+            Illustrations identify a movement; they do not show how to perform
+            it.
           </p>
           <ul className="source-list">
             {skill.sources.map((ref) => (

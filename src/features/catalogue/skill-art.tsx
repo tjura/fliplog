@@ -177,13 +177,7 @@ export function SkillArt({
         >
           <path d={upright.limbs} fill="none" />
           <path className="art-body" d={upright.body} strokeWidth="3" />
-          <circle
-            className="art-skin"
-            cx="120"
-            cy="27"
-            r="9"
-            strokeWidth="3"
-          />
+          <circle className="art-skin" cx="120" cy="27" r="9" strokeWidth="3" />
         </g>
       ) : null}
       {drawing.label && !decorative ? (
