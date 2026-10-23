@@ -214,23 +214,52 @@ p {
 .foundation-list {
   list-style: none;
   padding: 0;
-  margin: 16px 0 0;
+  margin: 8px 0 0;
+  display: grid;
+  gap: 8px;
 }
-.foundation-list li {
-  border-top: 1px solid var(--line);
-  padding: 16px 0;
-}
-.foundation-list li > a {
-  display: inline-flex;
-  min-height: 44px;
+.foundation-tile {
+  display: flex;
   align-items: center;
-  font-weight: 650;
+  gap: 12px;
+  min-height: 72px;
+  padding: 6px 12px 6px 6px;
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--ink);
+  text-decoration: none;
+  transition: background 160ms ease;
 }
-.foundation-list p {
-  margin-bottom: 8px;
+.foundation-tile:hover {
+  background: #e8eee6;
 }
-.recorded-foundation {
+.foundation-tile > .skill-art {
+  width: 84px;
+  flex: 0 0 84px;
+}
+.row-copy > .recorded-foundation {
   color: var(--teal);
+}
+.foundation-check {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+}
+.foundation-check circle {
+  fill: var(--teal);
+}
+.foundation-check path {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.starting-skill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
 }
 .chevron {
   width: 20px;
